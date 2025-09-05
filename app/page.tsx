@@ -13,8 +13,17 @@ export default function HomePage() {
   useEffect(() => {
     const loadPuzzle = async () => {
       try {
+        setLoading(true)
+        // Load the actual puzzle from the backend API
         const puzzleData = await puzzleApi.getPuzzle("current")
-        setPuzzle(puzzleData)
+        if (puzzleData) {
+          setPuzzle(puzzleData)
+          console.log('🔍 Main Page - Loaded puzzle from backend:', puzzleData)
+          console.log('🖼️ Main Page - Puzzle image URL:', puzzleData.imageUrl)
+          console.log('🖼️ Main Page - First piece image URL:', puzzleData.pieces[0]?.imageUrl)
+        } else {
+          console.error('❌ Main Page - No puzzle data received from backend')
+        }
       } catch (error) {
         console.error("Failed to load puzzle:", error)
       } finally {
@@ -25,11 +34,13 @@ export default function HomePage() {
     loadPuzzle()
   }, [])
 
+  // Subscribe to puzzle updates for real-time sync
   useEffect(() => {
     let unsubscribe = () => {}
 
-    if (puzzle) {
+    if (puzzle && puzzle.id) {
       unsubscribe = puzzleApi.subscribe(puzzle.id, (updatedPuzzle) => {
+        console.log('🔄 Main Page - Received puzzle update from subscription')
         setPuzzle(updatedPuzzle)
       })
     }

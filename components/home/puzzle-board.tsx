@@ -13,36 +13,9 @@ interface PuzzleBoardProps {
 
 export function PuzzleBoard({ puzzle }: PuzzleBoardProps) {
   const { rows, cols, pieces } = puzzle
-  const [isComplete, setIsComplete] = useState(false)
-
-  // Check if puzzle is complete
-  useEffect(() => {
-    const completedPieces = pieces.filter((p) => p.isPlaced).length
-    const totalPieces = pieces.length
-    const isPuzzleComplete = completedPieces === totalPieces
-    
-    if (isPuzzleComplete && !isComplete) {
-      setIsComplete(true)
-      // Show completion message and potentially move to next puzzle
-      setTimeout(() => {
-        alert("🎉 Puzzle Complete! Moving to next puzzle...")
-        // Reload the page to get the next puzzle
-        window.location.reload()
-      }, 2000)
-    }
-  }, [pieces, isComplete])
 
   return (
     <div className="w-full h-screen p-2">
-      {/* Puzzle completion overlay */}
-      {isComplete && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-bold text-green-600 mb-4">🎉 Puzzle Complete!</h2>
-            <p className="text-gray-600">Moving to the next puzzle...</p>
-          </div>
-        </div>
-      )}
 
       {/* Puzzle Board with Background Image */}
       <div className="relative w-full h-full rounded-lg shadow-lg overflow-hidden">

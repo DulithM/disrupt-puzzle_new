@@ -4,6 +4,8 @@ const PUZZLE_API_URL = 'https://gap.generationalpha.site'
 
 export async function GET() {
   try {
+    console.log('🔍 API Route - Fetching puzzle data from:', `${PUZZLE_API_URL}/puzzel/image`)
+    
     const response = await fetch(`${PUZZLE_API_URL}/puzzel/image`, {
       method: 'GET',
       headers: {
@@ -11,11 +13,25 @@ export async function GET() {
       },
     })
 
+    console.log('📡 API Route - Response status:', response.status)
+    console.log('📡 API Route - Response ok:', response.ok)
+
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+      const errorText = await response.text()
+      console.error('❌ API Route - External API error:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText
+      })
+      throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`)
     }
 
     const data = await response.json()
+    console.log('✅ API Route - Successfully fetched puzzle data:', {
+      current_image: data.current_image,
+      image_link: data.image_link,
+      status_length: data.status?.length
+    })
     
     return NextResponse.json(data, {
       headers: {
@@ -25,9 +41,17 @@ export async function GET() {
       },
     })
   } catch (error) {
-    console.error('Error fetching puzzle data:', error)
+    console.error('❌ API Route - Error fetching puzzle data:', error)
+    console.error('❌ API Route - Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined
+    })
+    
     return NextResponse.json(
-      { error: 'Failed to fetch puzzle data' },
+      { 
+        error: 'Failed to fetch puzzle data',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { 
         status: 500,
         headers: {
