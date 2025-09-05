@@ -38,3 +38,20 @@ export interface BackendPieceUpdate {
   piece_index: number
   state: number // 0 = not placed, 1 = placed
 }
+
+// Golden Ticket types
+export interface GoldenTicket {
+  id: string
+  wonAt: Date
+  expiresAt: Date
+  gameType: string
+  pieceId: string
+  isRedeemed: boolean
+  redeemedAt?: Date
+}
+
+export interface GoldenTicketState {
+  hasWonTicket: boolean
+  ticket: GoldenTicket | null
+  showTicket: boolean
+}
