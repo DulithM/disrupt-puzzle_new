@@ -15,7 +15,7 @@ export function PuzzleBoard({ puzzle }: PuzzleBoardProps) {
   const { rows, cols, pieces } = puzzle
 
   return (
-    <div className="w-full h-screen p-2">
+    <div className="w-full h-screen p-1 sm:p-2">
 
       {/* Puzzle Board with Background Image */}
       <div className="relative w-full h-full rounded-lg shadow-lg overflow-hidden">
@@ -57,7 +57,7 @@ export function PuzzleBoard({ puzzle }: PuzzleBoardProps) {
                     // Show QR code when not placed
                     <QRCode
                       value={`${window.location.origin}/piece/${piece.id}`}
-                      size={Math.min(120, Math.min(window.innerWidth / cols, window.innerHeight / rows) - 20)}
+                      size={Math.min(80, Math.min(window.innerWidth / cols, window.innerHeight / rows) - 10)}
                       className="w-full h-full object-contain"
                     />
                   )}

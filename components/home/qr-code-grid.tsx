@@ -41,29 +41,29 @@ export function QRCodeGrid({ puzzle }: QRCodeGridProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold">QR Codes</h2>
-          <p className="text-muted-foreground">Scan to access individual puzzle pieces</p>
+          <h2 className="text-xl sm:text-2xl font-bold">QR Codes</h2>
+          <p className="text-sm sm:text-base text-muted-foreground">Scan to access individual puzzle pieces</p>
         </div>
-        <Button onClick={printAllQRCodes} variant="outline">
+        <Button onClick={printAllQRCodes} variant="outline" size="sm" className="w-full sm:w-auto">
           <Printer className="w-4 h-4 mr-2" />
           Print All
         </Button>
       </div>
 
       {/* QR Code Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
         {puzzle.pieces.map((piece) => {
           const pieceUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/piece/${piece.id}`
 
           return (
             <Card key={piece.id} data-piece-id={piece.id} className="print:break-inside-avoid">
-              <CardHeader className="pb-3">
+              <CardHeader className="pb-2 sm:pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm">
+                  <CardTitle className="text-xs sm:text-sm">
                     Piece ({piece.row}, {piece.col})
                   </CardTitle>
                   <Badge variant={piece.isPlaced ? "default" : "secondary"} className="text-xs">
@@ -75,9 +75,9 @@ export function QRCodeGrid({ puzzle }: QRCodeGridProps) {
                 </CardDescription>
               </CardHeader>
 
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-2 sm:space-y-3">
                                       {/* QR Code or Piece Image */}
-                      <div className="flex justify-center h-32 relative">
+                      <div className="flex justify-center h-24 sm:h-32 relative">
                         {piece.isPlaced ? (
                           <div className="relative w-full h-full border rounded overflow-hidden">
                             {/* Background image preview */}
@@ -91,16 +91,16 @@ export function QRCodeGrid({ puzzle }: QRCodeGridProps) {
                             />
                           </div>
                         ) : (
-                          <QRCode value={pieceUrl} size={120} className="border rounded bg-white" />
+                          <QRCode value={pieceUrl} size={96} className="border rounded bg-white" />
                         )}
                       </div>
 
                 {/* URL */}
-                <div className="text-xs text-muted-foreground break-all bg-muted p-2 rounded">{pieceUrl}</div>
+                <div className="text-xs text-muted-foreground break-all bg-muted p-1 sm:p-2 rounded">{pieceUrl}</div>
 
                 {/* Actions - Only show for unplaced pieces */}
                 {!piece.isPlaced && (
-                  <div className="flex gap-2">
+                  <div className="flex gap-1 sm:gap-2">
                     <Button
                       size="sm"
                       variant="outline"
