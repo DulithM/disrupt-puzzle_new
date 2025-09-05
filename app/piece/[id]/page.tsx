@@ -194,13 +194,13 @@ export default function PiecePage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-cyan-100 via-white to-orange-100">
       {/* Game Content */}
-      <div className="flex-1 flex items-center justify-center p-2 sm:p-4">
-        <div className="w-full max-w-sm sm:max-w-md space-y-4 sm:space-y-6">
+      <div className="flex-1 flex items-center justify-center p-1 sm:p-2 md:p-4">
+        <div className="w-full max-w-xs sm:max-w-sm md:max-w-md space-y-3 sm:space-y-4 md:space-y-6">
           {/* Game Card */}
           <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
-            <CardHeader className="text-center pb-3 sm:pb-4 pt-6 sm:pt-8">
-              <div className="flex items-center justify-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
-                <div className="w-14 h-14 sm:w-12 sm:h-12 md:w-16 md:h-16 relative">
+            <CardHeader className="text-center pb-2 sm:pb-3 md:pb-4 pt-4 sm:pt-6 md:pt-8">
+              <div className="flex items-center justify-center space-x-2 sm:space-x-3 md:space-x-4 mb-3 sm:mb-4 md:mb-6">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 relative">
                   <Image
                     src="/logos/logo-01.png"
                     alt="Disrupt Asia Logo"
@@ -210,14 +210,14 @@ export default function PiecePage() {
                   />
                 </div>
                 <div className="block">
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">
+                  <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">
                     Disrupt <span className="text-red-600">Asia</span> 2025
                   </h2>
                   <p className="text-xs sm:text-sm font-bold text-cyan-600">Puzzle Challenge</p>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="px-3 sm:px-6">
+            <CardContent className="px-2 sm:px-3 md:px-6">
               <GameManager 
                 piece={piece} 
                 onSuccess={handleGameSuccess} 
@@ -229,7 +229,7 @@ export default function PiecePage() {
           </Card>
           
           {/* Footer Branding */}
-          <div className="text-center px-2">
+          <div className="text-center px-1 sm:px-2">
             <p className="text-xs sm:text-sm text-muted-foreground">
               Part of the Disrupt Asia 2025 Interactive Experience
             </p>

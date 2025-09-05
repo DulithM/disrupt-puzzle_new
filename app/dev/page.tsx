@@ -208,70 +208,77 @@ export default function DevPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-100 via-white to-orange-100">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-7xl">
         {/* Header */}
-        <div className="mb-8">
-          <Button variant="ghost" onClick={() => router.push("/")} className="mb-6">
+        <div className="mb-3 sm:mb-6">
+          <Button variant="ghost" onClick={() => router.push("/")} className="mb-3 sm:mb-4 text-sm">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Main Puzzle
           </Button>
 
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                🛠️ Dev Console
-              </h1>
-              <p className="text-gray-600">
-                Test and manage puzzle pieces
-              </p>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="text-xs">
-                {puzzle.rows}×{puzzle.cols}
-              </Badge>
-              <Badge variant="secondary" className="text-xs">
-                {totalPieces} pieces
-              </Badge>
-            </div>
+          <div className="mb-3 sm:mb-4">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
+              🛠️ Dev Console
+            </h1>
+            <p className="text-xs sm:text-sm text-gray-600">
+              Test and manage puzzle pieces
+            </p>
+          </div>
+          
+          {/* Badges - Stack on mobile */}
+          <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
+            <Badge variant="outline" className="text-xs">
+              {puzzle.rows}×{puzzle.cols}
+            </Badge>
+            <Badge variant="secondary" className="text-xs">
+              {totalPieces} pieces
+            </Badge>
           </div>
 
-          {/* Simple Controls */}
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-600">Progress:</span>
-              <span className="text-sm font-semibold">{completedPieces}/{totalPieces}</span>
-              <Progress value={completionPercentage} className="w-20 h-2" />
-              <span className="text-xs text-gray-500">{Math.round(completionPercentage)}%</span>
-            </div>
-            
-            <div className="flex gap-2">
-              <Button 
-                onClick={completeAllPieces}
-                disabled={isCompletingAll || completedPieces === totalPieces}
-                size="sm"
-              >
-                {isCompletingAll ? (
-                  <>
-                    <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
-                    Completing...
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-3 h-3 mr-1" />
-                    Complete All
-                  </>
-                )}
-              </Button>
+          {/* Progress Section - Better mobile layout */}
+          <div className="bg-white/50 backdrop-blur-sm rounded-lg p-3 sm:p-4 mb-3 sm:mb-4">
+            <div className="flex flex-col gap-3">
+              {/* Progress Bar */}
+              <div className="flex items-center justify-between">
+                <span className="text-xs sm:text-sm text-gray-600 font-medium">Progress</span>
+                <span className="text-xs sm:text-sm font-semibold text-gray-900">
+                  {completedPieces}/{totalPieces} ({Math.round(completionPercentage)}%)
+                </span>
+              </div>
+              <Progress value={completionPercentage} className="h-2" />
               
-              <Button 
-                onClick={refreshPuzzle}
-                variant="outline"
-                disabled={loading}
-                size="sm"
-              >
-                <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} />
-              </Button>
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Button 
+                  onClick={completeAllPieces}
+                  disabled={isCompletingAll || completedPieces === totalPieces}
+                  size="sm"
+                  className="text-xs flex-1 sm:flex-none"
+                >
+                  {isCompletingAll ? (
+                    <>
+                      <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-2"></div>
+                      Completing...
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-3 h-3 mr-2" />
+                      Complete All
+                    </>
+                  )}
+                </Button>
+                
+                <Button 
+                  onClick={refreshPuzzle}
+                  variant="outline"
+                  disabled={loading}
+                  size="sm"
+                  className="text-xs"
+                >
+                  <RefreshCw className={`w-3 h-3 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                  Refresh
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -279,16 +286,16 @@ export default function DevPage() {
         {/* Puzzle Pieces */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Users className="w-5 h-5" />
+            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+              <Users className="w-4 h-4 sm:w-5 sm:h-5" />
               Puzzle Pieces
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm">
               Click "Complete" to test individual pieces
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-2 sm:gap-3">
               {puzzle.pieces.map((piece) => {
                 const pieceUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/piece/${piece.id}`
                 const isCompleting = completingPiece === piece.id
@@ -319,14 +326,14 @@ export default function DevPage() {
 
                     <CardContent className="space-y-2">
                       {/* QR Code */}
-                      <div className="flex justify-center h-16">
+                      <div className="flex justify-center h-12 sm:h-16">
                         <a 
                           href={pieceUrl} 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="cursor-pointer hover:opacity-80 transition-opacity"
                         >
-                          <QRCode value={pieceUrl} size={64} className="border rounded bg-white" />
+                          <QRCode value={pieceUrl} size={48} className="border rounded bg-white" />
                         </a>
                       </div>
 
@@ -336,7 +343,7 @@ export default function DevPage() {
                           size="sm"
                           onClick={() => completePiece(piece.id)}
                           disabled={isCompleting}
-                          className="w-full text-xs h-7"
+                          className="w-full text-xs h-6 sm:h-7"
                         >
                           {isCompleting ? (
                             <>
@@ -358,7 +365,7 @@ export default function DevPage() {
                           size="sm"
                           variant="outline"
                           onClick={() => copyToClipboard(pieceUrl, piece.id)}
-                          className="w-full text-xs h-6"
+                          className="w-full text-xs h-5 sm:h-6"
                         >
                           {copiedId === piece.id ? (
                             <Check className="w-3 h-3" />

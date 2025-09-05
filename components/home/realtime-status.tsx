@@ -82,18 +82,24 @@ export function RealtimeStatus({ puzzleId, userId }: RealtimeStatusProps) {
   }
 
   return (
-    <div className="flex items-center gap-3 text-sm">
-      <Badge variant={getStatusColor()} className="flex items-center gap-1">
-        {getStatusIcon()}
-        {connectionStatus}
-      </Badge>
+    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+      <div className="flex items-center gap-2 sm:gap-3">
+        <Badge variant={getStatusColor()} className="flex items-center gap-1 text-xs">
+          {getStatusIcon()}
+          {connectionStatus}
+        </Badge>
 
-      <Badge variant="outline" className="flex items-center gap-1">
-        <Users className="w-3 h-3" />
-        {activeUsers} active
-      </Badge>
+        <Badge variant="outline" className="flex items-center gap-1 text-xs">
+          <Users className="w-3 h-3" />
+          {activeUsers} active
+        </Badge>
+      </div>
 
-      {recentActivity.length > 0 && <div className="text-xs text-muted-foreground">{recentActivity[0]}</div>}
+      {recentActivity.length > 0 && (
+        <div className="text-xs text-muted-foreground truncate">
+          {recentActivity[0]}
+        </div>
+      )}
     </div>
   )
 }

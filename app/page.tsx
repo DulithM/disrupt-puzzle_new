@@ -52,10 +52,10 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-100 via-white to-orange-100 p-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading puzzle...</p>
+          <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-primary mx-auto mb-3 sm:mb-4"></div>
+          <p className="text-sm sm:text-base text-muted-foreground">Loading puzzle...</p>
         </div>
       </div>
     )
@@ -63,16 +63,16 @@ export default function HomePage() {
 
   if (!puzzle) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-100 via-white to-orange-100 p-4">
         <div className="text-center">
-          <p className="text-muted-foreground">Puzzle not found</p>
+          <p className="text-sm sm:text-base text-muted-foreground">Puzzle not found</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-100 via-white to-orange-100">
       <PuzzleBoard puzzle={puzzle} />
     </div>
   )

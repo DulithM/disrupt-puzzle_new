@@ -85,22 +85,22 @@ export function PuzzleStatus() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Image className="w-5 h-5" />
+        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+          <Image className="w-4 h-4 sm:w-5 sm:h-5" />
           Puzzle Status
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="text-sm">
           Real-time puzzle progress
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium">Current Puzzle</span>
-          <Badge variant="outline">Image {puzzleData.current_image}</Badge>
+          <span className="text-xs sm:text-sm font-medium">Current Puzzle</span>
+          <Badge variant="outline" className="text-xs">Image {puzzleData.current_image}</Badge>
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-xs sm:text-sm">
             <span>Progress</span>
             <span>{completedPieces} / {totalPieces} pieces</span>
           </div>
@@ -115,21 +115,21 @@ export function PuzzleStatus() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+        <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
-            <Users className="w-4 h-4" />
+            <Users className="w-3 h-3 sm:w-4 sm:h-4" />
             <span>Collaborative</span>
           </div>
           <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
+            <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
             <span>Real-time</span>
           </div>
         </div>
 
         {completionPercentage === 100 && (
-          <div className="text-center p-3 bg-green-50 border border-green-200 rounded-lg">
-            <p className="text-green-700 font-semibold">🎉 Puzzle Complete!</p>
-            <p className="text-green-600 text-sm">Moving to next puzzle...</p>
+          <div className="text-center p-2 sm:p-3 bg-green-50 border border-green-200 rounded-lg">
+            <p className="text-green-700 font-semibold text-sm sm:text-base">🎉 Puzzle Complete!</p>
+            <p className="text-green-600 text-xs sm:text-sm">Moving to next puzzle...</p>
           </div>
         )}
       </CardContent>

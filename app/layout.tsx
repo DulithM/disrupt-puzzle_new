@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Disrupt Asia Team' }],
   keywords: ['Disrupt Asia', 'Puzzle Game', 'Collaborative', 'QR Codes', 'Technology', 'Innovation', 'Asia'],
   robots: 'index, follow',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
   icons: {
     icon: '/logos/logo-02.png',
     apple: '/logos/logo-02.png',
